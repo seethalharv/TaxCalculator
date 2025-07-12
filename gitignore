@@ -1,0 +1,40 @@
+# Build results
+bin/
+obj/
+out/
+
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Azure Functions local settings
+local.settings.json
+
+# Visual Studio files
+.vscode/
+.vs/
+
+# Logs
+*.log
+
+# Publish output
+publish/
+
+# JetBrains Rider / ReSharper
+.idea/
+*.DotSettings.user
+
+# npm packages (if any UI or hybrid app involved)
+node_modules/
+
+# Function extensions bin
+**/Generated/
+**/GeneratedCode/
+
+# Mac system files
+.DS_Store
+
+# Windows Thumbs.db
+Thumbs.db
