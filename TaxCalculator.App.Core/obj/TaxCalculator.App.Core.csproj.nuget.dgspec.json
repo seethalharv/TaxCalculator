@@ -11,7 +11,7 @@
         "projectName": "TaxCalculator.App.Core",
         "projectPath": "C:\\Users\\seeth\\source\\repos\\TaxCalculator\\TaxCalculator.App.Core\\TaxCalculator.App.Core.csproj",
         "packagesPath": "C:\\Users\\seeth\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\seeth\\source\\repos\\TaxCalculator\\TaxCalculator.App.Core\\obj\\",
+        "outputPath": "C:\\Users\\seeth\\Source\\Repos\\TaxCalculator\\TaxCalculator.App.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "edbstFPk7NA=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\seeth\\source\\repos\\TaxCalculator\\TaxCalculator.App.Services\\TaxCalculator.App.Services.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\seeth\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.7\\microsoft.extensions.dependencyinjection.abstractions.9.0.7.nupkg.sha512",
+    "C:\\Users\\seeth\\.nuget\\packages\\microsoft.extensions.options\\9.0.7\\microsoft.extensions.options.9.0.7.nupkg.sha512",
+    "C:\\Users\\seeth\\.nuget\\packages\\microsoft.extensions.primitives\\9.0.7\\microsoft.extensions.primitives.9.0.7.nupkg.sha512"
+  ],
+  "logs": []
+}
