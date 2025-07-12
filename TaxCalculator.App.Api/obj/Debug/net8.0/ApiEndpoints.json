@@ -1,0 +1,28 @@
+[
+  {
+    "ContainingType": "TaxCalculator.App.Api.Controllers.TaxCalculatorController",
+    "Method": "Calculate",
+    "RelativePath": "TaxCalculator/calculate",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "input",
+        "Type": "TaxCalculator.App.Core.Models.TaxInput",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "TaxCalculator.App.Core.Models.TaxResult",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  }
+]
