@@ -1,7 +1,7 @@
 # Build results
-bin/
-obj/
-out/
+**/[Bb]in/
+**/[Oo]bj/
+**/[Rr]ef/
 
 # User-specific files
 *.user
@@ -38,3 +38,38 @@ node_modules/
 
 # Windows Thumbs.db
 Thumbs.db
+/TaxCalculator.App.Api/bin/Debug/net8.0/TaxCalculator.App.Api.dll
+/TaxCalculator.App.Api/bin/Debug/net8.0/TaxCalculator.App.Api.exe
+/TaxCalculator.App.Api/bin/Debug/net8.0/TaxCalculator.App.Api.pdb
+/TaxCalculator.App.Api/bin/Debug/net8.0/TaxCalculator.App.Core.dll
+/TaxCalculator.App.Api/bin/Debug/net8.0/TaxCalculator.App.Core.pdb
+/TaxCalculator.App.Api/bin/Debug/net8.0/TaxCalculator.App.Services.dll
+/TaxCalculator.App.Api/bin/Debug/net8.0/TaxCalculator.App.Services.pdb
+/TaxCalculator.App.Core/bin/Debug/net8.0/TaxCalculator.App.Core.dll
+/TaxCalculator.App.Core/bin/Debug/net8.0/TaxCalculator.App.Core.pdb
+/TaxCalculator.App.Core/obj/Debug/net8.0/ref/TaxCalculator.App.Core.dll
+/TaxCalculator.App.Core/obj/Debug/net8.0/refint/TaxCalculator.App.Core.dll
+/TaxCalculator.App.Core/obj/Debug/net8.0/TaxCalculator.App.Core.AssemblyInfoInputs.cache
+/TaxCalculator.App.Core/obj/Debug/net8.0/TaxCalculator.App.Core.dll
+/TaxCalculator.App.Core/obj/Debug/net8.0/TaxCalculator.App.Core.pdb
+/TaxCalculator.App.Core/obj/Debug/net8.0/TaxCalculator.App.Core.sourcelink.json
+/TaxCalculator.App.Services/bin/Debug/net8.0/TaxCalculator.App.Core.dll
+/TaxCalculator.App.Services/bin/Debug/net8.0/TaxCalculator.App.Core.pdb
+/TaxCalculator.App.Services/bin/Debug/net8.0/TaxCalculator.App.Services.dll
+/TaxCalculator.App.Services/bin/Debug/net8.0/TaxCalculator.App.Services.pdb
+/TaxCalculator.App.Services/obj/Debug/net8.0/ref/TaxCalculator.App.Services.dll
+/TaxCalculator.App.Services/obj/Debug/net8.0/refint/TaxCalculator.App.Services.dll
+/TaxCalculator.App.Services/obj/Debug/net8.0/TaxCalculator.App.Services.AssemblyInfoInputs.cache
+/TaxCalculator.App.Services/obj/Debug/net8.0/TaxCalculator.App.Services.csproj.AssemblyReference.cache
+/TaxCalculator.App.Services/obj/Debug/net8.0/TaxCalculator.App.Services.dll
+/TaxCalculator.App.Services/obj/Debug/net8.0/TaxCalculator.App.Services.pdb
+/TaxCalculator.App.Api/obj/Debug/net8.0/refint/TaxCalculator.App.Api.dll
+/TaxCalculator.App.Api/obj/Debug/net8.0/TaxCalculator.App.Api.sourcelink.json
+/TaxCalculator.App.Api/obj/Debug/net8.0/TaxCalculator.App.Api.pdb
+/TaxCalculator.App.Api/obj/Debug/net8.0/TaxCalculator.App.Api.dll
+/TaxCalculator.App.Api/obj/Debug/net8.0/ref/TaxCalculator.App.Api.dll
+/TaxCalculator.App.Api/obj/Debug/net8.0/apphost.exe
+/TaxCalculator.App.Api/obj/Debug/net8.0/rjsmcshtml.dswa.cache.json
+/TaxCalculator.App.Api/obj/Debug/net8.0/rjsmrazor.dswa.cache.json
+/TaxCalculator.App.Api/obj/Debug/net8.0/TaxCalculator.App.Api.AssemblyInfoInputs.cache
+/TaxCalculator.App.Api/obj/Debug/net8.0/TaxCalculator.App.Api.csproj.AssemblyReference.cache
