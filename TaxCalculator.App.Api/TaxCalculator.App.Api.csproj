@@ -16,6 +16,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="AngularClient\browser\**\*">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+
+  <ItemGroup>
     <ProjectReference Include="..\TaxCalculator.App.Core\TaxCalculator.App.Core.csproj" />
     <ProjectReference Include="..\TaxCalculator.App.Services\TaxCalculator.App.Services.csproj" />
   </ItemGroup>
