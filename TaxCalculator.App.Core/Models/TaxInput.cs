@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace TaxCalculator.App.Core.Models
 	/// This class represents the input model for tax calculation.
 	/// Leaving this as class and not just a record to allow for future extensibility.
 	/// </summary>
+	[ExcludeFromCodeCoverageAttribute]
 	public class TaxInput
 	{
 		[Required(ErrorMessage = "Salary is required.")]

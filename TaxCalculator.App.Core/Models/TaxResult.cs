@@ -1,5 +1,8 @@
-﻿namespace TaxCalculator.App.Core.Models
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace TaxCalculator.App.Core.Models
 {
+	[ExcludeFromCodeCoverageAttribute]
 	public class TaxResult
 	{
 		public decimal GrossAnnual { get; set; }

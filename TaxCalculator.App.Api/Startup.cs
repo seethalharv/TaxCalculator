@@ -1,7 +1,10 @@
-﻿namespace TaxCalculator.App.Api
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace TaxCalculator.App.Api
 {
 	public class Startup
 	{
+		[ExcludeFromCodeCoverageAttribute]
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddControllers();

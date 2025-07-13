@@ -1,0 +1,42 @@
+{
+	"info": {
+		"_postman_id": "524ec502-5a19-4287-b60c-56483e5a4f6b",
+		"name": "UK Tax Calculator API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1323928",
+		"_collection_link": "https://interstellar-water-434929.postman.co/workspace/Test-API~b5e02bd1-d908-49bb-bd87-98efa3eadd0a/collection/1323928-524ec502-5a19-4287-b60c-56483e5a4f6b?action=share&source=collection_link&creator=1323928"
+	},
+	"item": [
+		{
+			"name": "POST - Calculate Tax",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"salary\": 30000\n}"
+				},
+				"url": {
+					"raw": "https://localhost:7072/api/taxCalculator/calculate",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7072",
+					"path": [
+						"api",
+						"taxCalculator",
+						"calculate"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
