@@ -97,7 +97,7 @@ cd TaxCalculator.App.Api
 dotnet run
 ```
 
-- 🔗 UI: `https://localhost:7072/`
+- 🔗 UI: `https://localhost:7072/index.html` (this will take you to the calculator angualr UI single page)
 - 🔗 Swagger: `https://localhost:7072/swagger`
 - 🔗 API: `POST /api/taxCalculator/calculate`
 
