@@ -176,4 +176,4 @@ MIT License. See [`LICENSE`](./LICENSE) for details.
 ## ✉️ Contact
 
 Built by [sharv](https://github.com/seethalharv)  
-Questions? Open an [issue](https://github.com/seethalharv/uk-tax-calculator/issues) or email: seethalmd@gmail.com
+Questions? Please email: seethalmd@gmail.com
