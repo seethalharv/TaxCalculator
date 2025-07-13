@@ -19,4 +19,8 @@
     <ProjectReference Include="..\TaxCalculator.App.Services\TaxCalculator.App.Services.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="AngularClient\" />
+  </ItemGroup>
+
 </Project>

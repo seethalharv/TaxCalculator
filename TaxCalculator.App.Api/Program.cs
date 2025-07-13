@@ -20,6 +20,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ITaxCalculatorService, UKTaxCalculatorService>();
+builder.WebHost.UseWebRoot("AngularClient");
 
 //Add CORS policy
 builder.Services.AddCors(options =>
@@ -43,8 +44,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-//app.UseAuthorization();
+app.UseDefaultFiles();
+app.UseStaticFiles(); 
+app.MapFallbackToFile("index.html");
 
 app.MapControllers();
 
