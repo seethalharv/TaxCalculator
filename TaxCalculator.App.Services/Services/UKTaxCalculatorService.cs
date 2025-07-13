@@ -1,54 +1,81 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.ApplicationInsights;
+using Microsoft.Extensions.Logging;
 using TaxCalculator.App.Core.Models;
 
 namespace TaxCalculator.App.Services.Services
 {
+	/// <summary>
+	/// Provides functionality to calculate income tax for the UK based on specified tax bands.
+	/// </summary>
+	/// <remarks>This service calculates the total tax, net income, and other related values for a given annual
+	/// salary using a set of tax bands. The tax bands, which define the tax rates and thresholds, are injected into the
+	/// service and must be ordered by their lower limits in ascending order.</remarks>
 	public class UKTaxCalculatorService : ITaxCalculatorService
 	{
 		//The bands are set in app settings and injected via DI
 		private readonly List<TaxBand> _bands;
-		public UKTaxCalculatorService(IEnumerable<TaxBand> bands)
+		private readonly ILogger<UKTaxCalculatorService> _logger;
+		private readonly TelemetryClient _telemetry;
+		public UKTaxCalculatorService(IEnumerable<TaxBand> bands,
+	                                 ILogger<UKTaxCalculatorService> logger,
+	                                 TelemetryClient telemetry)
 		{
 			// Ensure bands are ordered by LowerLimit ascending
 			_bands = bands.OrderBy(b => b.LowerLimit).ToList();
+			_logger = logger ?? throw new ArgumentNullException(nameof(logger));
+			_telemetry = telemetry ?? throw new ArgumentNullException(nameof(telemetry));
 		}
 		public TaxResult Calculate(int salary)
 		{
-			decimal totalTax = 0;
+			if (salary <= 0)
+				throw new ArgumentException("Salary must be a positive integer.", nameof(salary));
 
-			foreach (var band in _bands)
+			if (_bands == null || !_bands.Any())
+				throw new InvalidOperationException("Tax bands are not configured.");
+
+			try
 			{
-				if (salary <= band.LowerLimit)
-					continue;
+				decimal totalTax = 0;
 
-				int bandLower = band.LowerLimit;
-				int bandUpper = band.UpperLimit ?? int.MaxValue;
-
-				int taxableInBand = Math.Min(salary, bandUpper) - bandLower;
-
-				if (taxableInBand > 0)
+				foreach (var band in _bands)
 				{
-					decimal bandTax = taxableInBand * (band.TaxRate / 100m);
-					totalTax += bandTax;
+					if (salary <= band.LowerLimit)
+						continue;
+
+					int bandLower = band.LowerLimit;
+					int bandUpper = band.UpperLimit ?? int.MaxValue;
+
+					int taxableInBand = Math.Min(salary, bandUpper) - bandLower;
+
+					if (taxableInBand > 0)
+					{
+						decimal bandTax = taxableInBand * (band.TaxRate / 100m);
+						totalTax += bandTax;
+					}
 				}
+
+				decimal netAnnual = salary - totalTax;
+
+				_logger.LogInformation("Tax calculated successfully for salary {Salary}", salary);
+				_telemetry.TrackEvent("TaxCalculationSuccess", new Dictionary<string, string> { { "Salary", salary.ToString() } });
+
+
+				return new TaxResult
+				{
+					GrossAnnual = salary,
+					GrossMonthly = Math.Round(salary / 12m, 2),
+					NetAnnual = Math.Round(netAnnual, 2),
+					NetMonthly = Math.Round(netAnnual / 12m, 2),
+					AnnualTax = Math.Round(totalTax, 2),
+					MonthlyTax = Math.Round(totalTax / 12m, 2)
+				};
 			}
-
-			decimal netAnnual = salary - totalTax;
-
-			return new TaxResult
+			catch (Exception ex)
 			{
-				GrossAnnual = salary,
-				GrossMonthly = Math.Round(salary / 12m, 2),
-				NetAnnual = Math.Round(netAnnual, 2),
-				NetMonthly = Math.Round(netAnnual / 12m, 2),
-				AnnualTax = Math.Round(totalTax, 2),
-				MonthlyTax = Math.Round(totalTax / 12m, 2)
-			};
+				_logger.LogError(ex, "Unhandled exception during tax calculation.");
+				_telemetry.TrackException(ex);
+				throw new InvalidOperationException("An error occurred while calculating tax.", ex);
+			}
 		}
 	}
 }

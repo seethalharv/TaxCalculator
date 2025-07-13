@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
 
 namespace TaxCalculator.App.Core.Models
 {
+	/// <summary>
+	/// Represents a tax band with defined lower and optional upper income limits, and an associated tax rate.	
+	/// </summary>
+	/// <remarks>A tax band defines a range of income and the percentage tax rate applied to that range.  The see
+	/// cref=UpperLimit property is nullable, indicating that the tax band may have no upper cap.</remarks>
 	[ExcludeFromCodeCoverageAttribute]
 	public class TaxBand
 	{

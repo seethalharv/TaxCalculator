@@ -1,7 +1,6 @@
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Extensions.FileProviders;
-using TaxCalculator.App.Api;
 using TaxCalculator.App.Core.Models;
 using TaxCalculator.App.Services.Services;
 
@@ -29,7 +28,8 @@ try
 	builder.Services.AddEndpointsApiExplorer();
 	builder.Services.AddSwaggerGen();
 	builder.Services.AddScoped<ITaxCalculatorService, UKTaxCalculatorService>();
-
+	builder.Services.AddApplicationInsightsTelemetry();
+	builder.Services.AddSingleton<TelemetryClient>();
 
 	//Add CORS policy
 	builder.Services.AddCors(options =>

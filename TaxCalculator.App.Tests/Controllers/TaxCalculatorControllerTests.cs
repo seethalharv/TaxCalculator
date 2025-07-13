@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.ApplicationInsights;
+using Microsoft.ApplicationInsights.Extensibility;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Moq;
 using TaxCalculator.App.Api.Controllers;
 using TaxCalculator.App.Core.Models;
@@ -9,14 +12,17 @@ namespace TaxCalculator.App.Tests.Controllers
 	[TestClass]
 	public class TaxCalculatorControllerTests
 	{
-		private Mock<ITaxCalculatorService> _mockService;
-		private TaxCalculatorController _controller;
+		private Mock<ITaxCalculatorService> _mockService = new();
+		private TaxCalculatorController _controller = null!;
 
 		[TestInitialize]
 		public void Setup()
 		{
 			_mockService = new Mock<ITaxCalculatorService>();
-			_controller = new TaxCalculatorController(_mockService.Object);
+			var _logger = new Mock<ILogger<TaxCalculatorController>>();
+			var telemetryConfig = TelemetryConfiguration.CreateDefault();
+			var telemetryClient = new TelemetryClient(telemetryConfig);
+			_controller = new TaxCalculatorController(_mockService.Object, _logger.Object, telemetryClient);
 		}
 
 		[TestMethod]
@@ -60,8 +66,8 @@ namespace TaxCalculator.App.Tests.Controllers
 			Assert.IsInstanceOfType(okResult.Value, typeof(TaxResult));
 			var actualResult = okResult.Value as TaxResult;
 
-			Assert.AreEqual(expectedResult.NetAnnual, actualResult.NetAnnual);
-			Assert.AreEqual(expectedResult.AnnualTax, actualResult.AnnualTax);
+			Assert.AreEqual(expectedResult.NetAnnual, actualResult?.NetAnnual);
+			Assert.AreEqual(expectedResult.AnnualTax, actualResult?.AnnualTax);
 		}
 	}
 }

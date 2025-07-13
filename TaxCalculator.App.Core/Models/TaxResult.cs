@@ -2,6 +2,13 @@
 
 namespace TaxCalculator.App.Core.Models
 {
+	/// <summary>
+	/// Represents the result of a tax calculation, including gross income, net income, and tax amounts on both an annual
+	/// and monthly basis.
+	/// </summary>
+	/// <remarks>This class provides a structured way to store and access the results of a tax computation. It
+	/// includes properties for gross and net income, as well as the corresponding tax amounts. Additionally, the tax year
+	/// is included to indicate the fiscal year for which the calculation applies.</remarks>
 	[ExcludeFromCodeCoverageAttribute]
 	public class TaxResult
 	{

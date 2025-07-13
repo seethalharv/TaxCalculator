@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.ApplicationInsights;
+using Microsoft.ApplicationInsights.Extensibility;
+using Microsoft.Extensions.Logging;
+using Moq;
 using TaxCalculator.App.Core.Models;
 using TaxCalculator.App.Services.Services;
 
@@ -11,7 +10,7 @@ namespace TaxCalculator.App.Tests.services
 	[TestClass]
 	public class UKTaxCalculatorServiceTests
 	{
-		private UKTaxCalculatorService _service;
+		private UKTaxCalculatorService _service = null!;
 
 		[TestInitialize]
 		public void Setup()
@@ -23,7 +22,11 @@ namespace TaxCalculator.App.Tests.services
 				new TaxBand { LowerLimit = 20000, UpperLimit = null, TaxRate = 40 }
 			};
 
-			_service = new UKTaxCalculatorService(bands);
+			// Mock logger
+			var loggerMock = new Mock<ILogger<UKTaxCalculatorService>>();
+			var telemetryConfig = TelemetryConfiguration.CreateDefault();
+			var telemetryClient = new TelemetryClient(telemetryConfig);
+			_service = new UKTaxCalculatorService(bands, loggerMock.Object, telemetryClient);
 		}
 
 		[TestMethod]
