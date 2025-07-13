@@ -1,8 +1,14 @@
+using Microsoft.Extensions.FileProviders;
 using TaxCalculator.App.Api;
 using TaxCalculator.App.Core.Models;
 using TaxCalculator.App.Services.Services;
 
-var builder = WebApplication.CreateBuilder(args);
+
+var options = new WebApplicationOptions
+{
+	WebRootPath = "AngularClient"  // This is needed to serve static files from the Angular client. 
+};
+var builder = WebApplication.CreateBuilder(options);
 
 var taxBands = builder.Configuration
 	.GetSection("TaxBands")
@@ -20,7 +26,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ITaxCalculatorService, UKTaxCalculatorService>();
-builder.WebHost.UseWebRoot("AngularClient");
+
 
 //Add CORS policy
 builder.Services.AddCors(options =>
@@ -45,9 +51,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseDefaultFiles();
-app.UseStaticFiles(); 
+app.UseStaticFiles(new StaticFileOptions
+{
+	FileProvider = new PhysicalFileProvider(
+		Path.Combine(Directory.GetCurrentDirectory(), "AngularClient", "browser")),
+	RequestPath = ""
+});
 app.MapFallbackToFile("index.html");
-
+app.UseRouting();
 app.MapControllers();
 
 app.Run();

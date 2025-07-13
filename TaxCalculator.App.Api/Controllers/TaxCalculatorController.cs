@@ -17,7 +17,7 @@ namespace TaxCalculator.App.Api.Controllers
 		[HttpPost("calculate")]
 		public ActionResult<TaxResult> Calculate([FromBody] TaxInput input)
 		{
-			var test = "small CICD change";
+
 			if (!ModelState.IsValid)
 			{
 				var errors = ModelState.Values
