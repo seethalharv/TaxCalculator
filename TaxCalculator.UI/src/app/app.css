@@ -21,3 +21,59 @@ button {
   margin-left: 10px;
   padding: 5px 10px;
 }
+.spinner-wrapper {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+.tax-container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.salary-input {
+  width: 100%;
+  margin: 20px 0;
+}
+
+.result-card {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.spinner {
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+}
+
+.error {
+  color: #d32f2f;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.styled-table th,
+.styled-table td {
+  border: 1px solid #ddd;
+  padding: 10px 16px;
+  text-align: left;
+}
+
+.styled-table th {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.styled-table tr:nth-child(even) {
+  background-color: #fafafa;
+}
+
+
