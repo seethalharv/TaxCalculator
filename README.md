@@ -175,5 +175,5 @@ MIT License. See [`LICENSE`](./LICENSE) for details.
 
 ## ✉️ Contact
 
-Built by [Your Name](https://github.com/<your-username>)  
-Questions? Open an [issue](https://github.com/<your-username>/uk-tax-calculator/issues) or email: your.email@example.com
+Built by [Your Name](https://github.com/seethalharv)  
+Questions? Open an [issue](https://github.com/seethalharv/uk-tax-calculator/issues) or email: seethalmd@gmail.com
