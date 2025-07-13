@@ -1,3 +1,4 @@
+using TaxCalculator.App.Api;
 using TaxCalculator.App.Core.Models;
 using TaxCalculator.App.Services.Services;
 
@@ -43,7 +44,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+//app.UseAuthorization();
 
 app.MapControllers();
 
