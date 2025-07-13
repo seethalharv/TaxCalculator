@@ -37,7 +37,3 @@ export class App {
     });
   }
 }
-
-// bootstrapApplication(App, {
-//   providers: [provideHttpClient()]
-// });
