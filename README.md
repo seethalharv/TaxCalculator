@@ -5,8 +5,9 @@
 ![Azure](https://img.shields.io/badge/Deployed-AzureAppService-blue)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
-A full-stack UK tax calculator that computes annual and monthly taxes based on configurable tax bands. Built with ASP.NET Core Web API and Angular, deployed as a unified app on Azure App Service.
-🔗 Live URL:
+A full-stack UK tax calculator that computes annual and monthly taxes based on configurable tax bands. 
+Built with ASP.NET Core Web API and Angular, deployed as a unified app on Azure App Service.
+🔗 Live URL: https://uk-tax-api-h5d9frg9c5b5e6ez.canadacentral-01.azurewebsites.net/index.html
 👉 UK Tax Calculator Web App
 
 Note: Authentication is not enabled in this deployment to allow open access for reviewers and demo purposes.
