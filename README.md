@@ -1,7 +1,7 @@
 # 💷 UK Tax Calculator – Full Stack ASP.NET Core + Angular App
 
 ![.NET](https://img.shields.io/badge/.NET-8.0-blueviolet)
-![Angular](https://img.shields.io/badge/Angular-17-red)
+![Angular](https://img.shields.io/badge/Angular-20-red)
 ![Azure](https://img.shields.io/badge/Deployed-AzureAppService-blue)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
