@@ -19,8 +19,21 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ITaxCalculatorService, UKTaxCalculatorService>();
-var app = builder.Build();
 
+//Add CORS policy
+builder.Services.AddCors(options =>
+{
+	options.AddDefaultPolicy(policy =>
+	{
+		policy
+			.WithOrigins("http://localhost:4200")
+			.AllowAnyMethod()
+			.AllowAnyHeader();
+	});
+});
+
+var app = builder.Build();
+app.UseCors();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

@@ -5,7 +5,7 @@ using TaxCalculator.App.Services.Services;
 namespace TaxCalculator.App.Api.Controllers
 {
 	[ApiController]
-	[Route("[controller]")]
+	[Route("api/taxCalculator")]
 	public class TaxCalculatorController : ControllerBase
 	{
 		private readonly ITaxCalculatorService _calculator;

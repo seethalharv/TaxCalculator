@@ -1,0 +1,20 @@
+ 
+<div class="container">
+  <h2>UK Tax Calculator</h2>
+
+  <label for="salary">Gross Annual Salary:</label>
+  <input type="number" id="salary" [(ngModel)]="salary" />
+
+  <button (click)="calculate()">Calculate</button>
+
+  <p *ngIf="error" class="error">{{ error }}</p>
+
+  <table *ngIf="result">
+    <tr><td><strong>Gross Annual:</strong></td><td>{{ result.grossAnnual | currency:'GBP' }}</td></tr>
+    <tr><td><strong>Gross Monthly:</strong></td><td>{{ result.grossMonthly | currency:'GBP' }}</td></tr>
+    <tr><td><strong>Net Annual:</strong></td><td>{{ result.netAnnual | currency:'GBP' }}</td></tr>
+    <tr><td><strong>Net Monthly:</strong></td><td>{{ result.netMonthly | currency:'GBP' }}</td></tr>
+    <tr><td><strong>Annual Tax:</strong></td><td>{{ result.annualTax | currency:'GBP' }}</td></tr>
+    <tr><td><strong>Monthly Tax:</strong></td><td>{{ result.monthlyTax | currency:'GBP' }}</td></tr>
+  </table>
+</div>
