@@ -5,7 +5,7 @@
 ![Azure](https://img.shields.io/badge/Deployed-AzureAppService-blue)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
-This application is deployed as a unified full-stack app on Azure App Service, combining the ASP.NET Core 8.0 Web API and Angular 17+ frontend.
+This application is deployed as a unified full-stack app on Azure App Service, combining the ASP.NET Core 8.0 Web API and Angular 20+ frontend.
 
 🔗 Live URL:
 https://uk-tax-api-h5d9frg9c5b5e6ez.canadacentral-01.azurewebsites.net/index.html
