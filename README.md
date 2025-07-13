@@ -114,7 +114,6 @@ dotnet test TaxCalculator.App.Tests
 Includes tests for:
 - `TaxCalculatorController`
 - `UKTaxCalculatorService`
-- API endpoint via `WebApplicationFactory<Program>`
 
 ---
 
