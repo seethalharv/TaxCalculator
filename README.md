@@ -32,14 +32,15 @@ Note: Authentication is not enabled in this deployment to allow open access for 
 ## 🧱 Architecture Overview
 
 ```
-TaxCalculator.App.Api/              → ASP.NET Core Web API
+TaxCalculator.App.Api/               → ASP.NET Core Web API
   ├── Controllers/
   ├── Program.cs
-  ├── appsettings.json              → Defines TaxBands
+  ├── appsettings.json               → Defines TaxBands
 
-TaxCalculator.App.Models/           → Domain models (TaxInput, TaxResult, TaxBand)
+TaxCalculator.App.Models/            → Domain models (TaxInput, TaxResult, TaxBand)
 
-TaxCalculator.App.Repository/        → Database access layer.
+TaxCalculator.App.Repository/        → Database access layer. The entities are restricted to this layer and any data exposed to
+                                       Api will need a model that needs to be mapped to control what is exposed to UI
 
 TaxCalculator.App.Services/          → Business logic (UKTaxCalculatorService)
 
