@@ -7,6 +7,6 @@ namespace TaxCalculator.App.Services.Services
 	/// </summary>
 	public interface ITaxCalculatorService
 	{
-		TaxResult Calculate(int salary);
+		TaxResult Calculate(decimal salary);
 	}
 }

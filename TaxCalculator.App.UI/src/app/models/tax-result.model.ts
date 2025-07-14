@@ -1,4 +1,3 @@
-// src/app/models/tax-result.model.ts
 export interface TaxResult {
   grossAnnual: number;
   grossMonthly: number;

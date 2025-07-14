@@ -25,7 +25,7 @@ namespace TaxCalculator.App.Services.Services
 			_logger = logger ?? throw new ArgumentNullException(nameof(logger));
 			_telemetry = telemetry ?? throw new ArgumentNullException(nameof(telemetry));
 		}
-		public TaxResult Calculate(int salary)
+		public TaxResult Calculate(decimal salary)
 		{
 			if (salary <= 0)
 				throw new ArgumentException("Salary must be a positive integer.", nameof(salary));
@@ -37,6 +37,7 @@ namespace TaxCalculator.App.Services.Services
 			{
 				decimal totalTax = 0;
 
+				//Loop through each tax band and calculate the tax
 				foreach (var band in _bands)
 				{
 					if (salary <= band.LowerLimit)
@@ -45,7 +46,7 @@ namespace TaxCalculator.App.Services.Services
 					int bandLower = band.LowerLimit;
 					int bandUpper = band.UpperLimit ?? int.MaxValue;
 
-					int taxableInBand = Math.Min(salary, bandUpper) - bandLower;
+					decimal taxableInBand = Math.Min(salary, bandUpper) - bandLower;
 
 					if (taxableInBand > 0)
 					{
@@ -54,12 +55,13 @@ namespace TaxCalculator.App.Services.Services
 					}
 				}
 
+				// Calculate net annual income after tax
 				decimal netAnnual = salary - totalTax;
 
 				_logger.LogInformation("Tax calculated successfully for salary {Salary}", salary);
 				_telemetry.TrackEvent("TaxCalculationSuccess", new Dictionary<string, string> { { "Salary", salary.ToString() } });
 
-
+				// Return the tax result with all calculated values and set isSuccess to true or else false.
 				return new TaxResult
 				{
 					GrossAnnual = salary,
@@ -67,14 +69,15 @@ namespace TaxCalculator.App.Services.Services
 					NetAnnual = Math.Round(netAnnual, 2),
 					NetMonthly = Math.Round(netAnnual / 12m, 2),
 					AnnualTax = Math.Round(totalTax, 2),
-					MonthlyTax = Math.Round(totalTax / 12m, 2)
+					MonthlyTax = Math.Round(totalTax / 12m, 2),
+					IsSuccess = true
 				};
 			}
 			catch (Exception ex)
 			{
 				_logger.LogError(ex, "Unhandled exception during tax calculation.");
 				_telemetry.TrackException(ex);
-				throw new InvalidOperationException("An error occurred while calculating tax.", ex);
+				return new TaxResult() { IsSuccess = false };
 			}
 		}
 	}

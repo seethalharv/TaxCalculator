@@ -1,0 +1,42 @@
+/* Set a dark purple background and white text for the whole app */
+body {
+  width : 1000px;
+  margin: 0;
+  background-color: #2e003e; /* Deep/dark purple */
+  color: #ffffff; /* White text */
+  font-family: Arial, sans-serif;
+}
+
+/* Optional: make sure your main layout container fills the screen */
+/* html, body {
+  height: 100%;
+  width: 1000px;
+} */
+
+/* Center content */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  background-color: #33004d; /* Deep purple */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+app-root {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+

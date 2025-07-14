@@ -9,7 +9,7 @@ namespace TaxCalculator.App.Core.Models
 	/// <remarks>This class provides a structured way to store and access the results of a tax computation. It
 	/// includes properties for gross and net income, as well as the corresponding tax amounts. Additionally, the tax year
 	/// is included to indicate the fiscal year for which the calculation applies.</remarks>
-	[ExcludeFromCodeCoverageAttribute]
+	[ExcludeFromCodeCoverage]
 	public class TaxResult
 	{
 		public decimal GrossAnnual { get; set; }
@@ -19,5 +19,6 @@ namespace TaxCalculator.App.Core.Models
 		public decimal AnnualTax { get; set; }
 		public decimal MonthlyTax { get; set; }
 		public string? TaxYear { get; set; } = DateTime.Now.Year.ToString();
+		public bool? IsSuccess { get; set; }
 	}
 }

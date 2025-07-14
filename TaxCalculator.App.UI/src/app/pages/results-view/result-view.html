@@ -1,0 +1,37 @@
+<div class="result-container mat-elevation-z4">
+  <h2>Tax Calculation Result</h2>
+
+  <table class="result-table">
+    <tr>
+      <th>Description</th>
+      <th>Amount (£)</th>
+    </tr>
+    <tr>
+      <td>Gross Annual Income</td>
+      <td>{{ result.grossAnnual | number:'1.0-2' }}</td>
+    </tr>
+    <tr>
+      <td>Gross Monthly Income</td>
+      <td>{{ result.grossMonthly | number:'1.0-2' }}</td>
+    </tr>
+    <tr>
+      <td>Net Annual Income</td>
+      <td>{{ result.netAnnual | number:'1.0-2' }}</td>
+    </tr>
+    <tr>
+      <td>Net Monthly Income</td>
+      <td>{{ result.netMonthly | number:'1.0-2' }}</td>
+    </tr>
+    <tr>
+      <td>Annual Tax</td>
+      <td>{{ result.annualTax | number:'1.0-2' }}</td>
+    </tr>
+    <tr>
+      <td>Monthly Tax</td>
+      <td>{{ result.monthlyTax | number:'1.0-2' }}</td>
+    </tr>
+  </table>
+
+  <button (click)="goBack()">Back</button>
+
+</div>

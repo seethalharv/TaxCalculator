@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "TaxCalculator.UI": {
+    "TaxCalculator.App.UI": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -25,18 +25,11 @@
               }
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.css"
             ]
           },
           "configurations": {
             "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
               "budgets": [
                 {
                   "type": "initial",
@@ -63,10 +56,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "TaxCalculator.UI:build:production"
+              "buildTarget": "TaxCalculator.App.UI:build:production"
             },
             "development": {
-              "buildTarget": "TaxCalculator.UI:build:development"
+              "buildTarget": "TaxCalculator.App.UI:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -89,8 +82,6 @@
               }
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/azure-blue.css",
-              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
             ]
           }
