@@ -33,7 +33,12 @@ namespace TaxCalculator.App.Services.Services
 
 			try
 			{
+				//Ideally if we are going to expose the entity to the UI layer , then map it to the model.
+				//Good practice to only expose the necessary information to the UI layer.
+				//skipping that here since we are not sending bands to the UI layer.
 				var bands = await _taxBandRepository.GetAllAsync();
+
+				//Should be ordered by LowerLimit in ascending order for the loop to work correctly.
 				bands = bands.OrderBy(b => b.LowerLimit).ToList();
 				decimal totalTax = 0;
 

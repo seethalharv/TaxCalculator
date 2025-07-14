@@ -32,7 +32,7 @@ public class TaxCalculatorControllerTests
 		var result = _controller.Calculate(null);
 
 		// Assert
-		Assert.IsInstanceOfType(result.Result, typeof(BadRequestObjectResult));
+		Assert.IsInstanceOfType(result.Result.Result, typeof(BadRequestObjectResult));
 	}
 
 	[TestMethod]
@@ -45,7 +45,7 @@ public class TaxCalculatorControllerTests
 		var result = _controller.Calculate(input);
 
 		// Assert
-		Assert.IsInstanceOfType(result.Result, typeof(BadRequestObjectResult));
+		Assert.IsInstanceOfType(result.Result.Result, typeof(BadRequestObjectResult));
 	}
 
 	[TestMethod]
@@ -61,7 +61,9 @@ public class TaxCalculatorControllerTests
 		var result = _controller.Calculate(input);
 
 		// Assert
-		var okResult = result.Result as OkObjectResult;
+		var actionResult = result.Result.Result; // this is the inner IActionResult
+		Assert.IsNotNull(actionResult);
+		var okResult = actionResult as OkObjectResult;
 		Assert.IsNotNull(okResult);
 		Assert.IsInstanceOfType(okResult.Value, typeof(TaxResult));
 		var actualResult = okResult.Value as TaxResult;

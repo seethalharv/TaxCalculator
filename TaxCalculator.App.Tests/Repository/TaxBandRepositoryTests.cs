@@ -8,6 +8,9 @@ using TaxCalculator.App.Repository.Implementations;
 
 namespace TaxCalculator.App.Tests.Repository
 {
+	/// <summary>
+	/// Test class to validate the functionality of the TaxBandRepository.	
+	/// </summary>
 	[TestClass]
 	public class TaxBandRepositoryTests
 	{

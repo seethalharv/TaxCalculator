@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace TaxCalculator.App.Repository.Entities
 {
+	/// <summary>
+	/// Represents a tax band entity in the system.
+	/// </summary>
 	public class TaxBandEntity
 	{
 		public int Id { get; set; }

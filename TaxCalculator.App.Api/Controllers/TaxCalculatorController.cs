@@ -36,7 +36,7 @@ public class TaxCalculatorController : ControllerBase
 	/// <returns>An <see cref="ActionResult{T}"/> containing the calculated tax result if the input is valid.  Returns a <see
 	/// cref="BadRequestObjectResult"/> with validation errors if the input is invalid.</returns>
 	[HttpPost("calculate")]
-	public ActionResult<TaxResult> Calculate([FromBody] TaxInput? input)
+	public async Task<ActionResult<TaxResult>> Calculate([FromBody] TaxInput? input)
 	{
 		//Since this function is pretty simeple , there is not enough use case to make this async.
 		_telemetry.TrackEvent("TaxCalculationRequest", new Dictionary<string, string>
@@ -59,7 +59,8 @@ public class TaxCalculatorController : ControllerBase
 
 		//I know its a lot of validations , but trust this is a good practice to ensure the input is valid
 
-		var result = _calculator.Calculate(input.Salary).Result;
+		//Adding await to the calculation to ensure it runs asynchronously.
+		var result = await _calculator.Calculate(input.Salary);
 		_telemetry.TrackEvent("TaxCalculationSuccess", new Dictionary<string, string>
 	    {
 		    { "Salary", input.Salary.ToString() },
