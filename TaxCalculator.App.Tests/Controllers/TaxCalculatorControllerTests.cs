@@ -53,9 +53,9 @@ public class TaxCalculatorControllerTests
 	{
 		// Arrange
 		var input = new TaxInput { Salary = 50000 };
-		var expectedResult = new TaxResult { NetAnnual = 40000, AnnualTax = 10000 };
+		var expectedResult = new TaxResult { NetAnnual = 40000, AnnualTax = 10000, IsSuccess = true };
 
-		_mockService.Setup(s => s.Calculate(50000)).Returns(expectedResult);
+		_mockService.Setup(s => s.Calculate(50000)).ReturnsAsync(expectedResult);
 
 		// Act
 		var result = _controller.Calculate(input);

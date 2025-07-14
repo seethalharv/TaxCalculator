@@ -16,7 +16,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TaxCalculator.App.Api\TaxCalculator.App.Api.csproj" />
-    <ProjectReference Include="..\TaxCalculator.App.Core\TaxCalculator.App.Core.csproj" />
+    <ProjectReference Include="..\TaxCalculator.App.Core\TaxCalculator.App.Models.csproj" />
+    <ProjectReference Include="..\TaxCalculator.App.Repository\TaxCalculator.App.Repository.csproj" />
     <ProjectReference Include="..\TaxCalculator.App.Services\TaxCalculator.App.Services.csproj" />
   </ItemGroup>
 

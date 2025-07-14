@@ -1,7 +1,11 @@
 using Microsoft.ApplicationInsights;
 using Microsoft.ApplicationInsights.Extensibility;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using TaxCalculator.App.Core.Models;
+using TaxCalculator.App.Repository.DbContexts;
+using TaxCalculator.App.Repository.Implementations;
+using TaxCalculator.App.Repository.Interfaces;
 using TaxCalculator.App.Services.Services;
 
 try
@@ -28,8 +32,11 @@ try
 	builder.Services.AddEndpointsApiExplorer();
 	builder.Services.AddSwaggerGen();
 	builder.Services.AddScoped<ITaxCalculatorService, UKTaxCalculatorService>();
+	builder.Services.AddScoped<ITaxBandRepository, TaxBandRepository>();
 	builder.Services.AddApplicationInsightsTelemetry();
 	builder.Services.AddSingleton<TelemetryClient>();
+	builder.Services.AddDbContext<AppDbContext>(options =>
+	options.UseInMemoryDatabase("TaxDb"));
 
 	//Add CORS policy
 	builder.Services.AddCors(options =>
@@ -44,6 +51,11 @@ try
 	});
 
 	var app = builder.Build();
+	using (var scope = app.Services.CreateScope())
+	{
+		var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+		dbContext.Database.EnsureCreated(); // For InMemory or development use
+	}
 	app.UseCors();
 	// Configure the HTTP request pipeline.
 	if (app.Environment.IsDevelopment())

@@ -1,6 +1,16 @@
 <div class="result-container mat-elevation-z4">
   <h2>Tax Calculation Result</h2>
 
+  <div class="input-row">
+    <label>Gross Annual Salary: </label>
+    <input type="number" [(ngModel)]="salary" />
+    <button (click)="calculateAgain()" [disabled]="loading">Calculate</button>
+  </div>
+
+  <div *ngIf="loading" class="spinner-container">
+    <div class="spinner"></div>
+  </div>
+
   <table class="result-table">
     <tr>
       <th>Description</th>

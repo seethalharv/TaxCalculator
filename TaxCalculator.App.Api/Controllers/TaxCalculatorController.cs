@@ -59,7 +59,7 @@ public class TaxCalculatorController : ControllerBase
 
 		//I know its a lot of validations , but trust this is a good practice to ensure the input is valid
 
-		var result = _calculator.Calculate(input.Salary);
+		var result = _calculator.Calculate(input.Salary).Result;
 		_telemetry.TrackEvent("TaxCalculationSuccess", new Dictionary<string, string>
 	    {
 		    { "Salary", input.Salary.ToString() },

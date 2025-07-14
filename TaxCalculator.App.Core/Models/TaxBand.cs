@@ -10,6 +10,7 @@ namespace TaxCalculator.App.Core.Models;
 [ExcludeFromCodeCoverage]
 public class TaxBand
 {
+	public int Id { get; set; } // Unique identifier for the tax band
 	public int LowerLimit { get; set; }
 	public int? UpperLimit { get; set; } // null = no upper cap
 	public int TaxRate { get; set; } // percentage

@@ -16,35 +16,43 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class SalaryInput {
   salary: number = 0;
+  loading: boolean = false;
 
   constructor(
     private taxService: TaxCalculatorService,
     private router: Router
-  ) {}
+  ) { }
 
   errorMessage: string | null = null;
   calculate() {
+    this.loading = true;
     const input: TaxInput = { salary: this.salary };
     this.taxService.calculateTax(input).subscribe({
       next: (result: TaxResult) => {
-        this.router.navigate(['/result'], { state: { result } });
+        this.loading = false;
+        setTimeout(() => {
+          this.router.navigate(['/result'], {
+            state: { salary: this.salary, result }
+          });
+        }, 100);
       },
       error: (err) => {
         this.errorMessage = this.getFriendlyErrorMessage(err);
         setTimeout(() => this.errorMessage = null, 5000);
         console.error('Tax calculation failed', err);
+        this.loading = false;
       }
     });
   }
 
   private getFriendlyErrorMessage(error: any): string {
-  if (error.status === 400) {
-    return 'Invalid input. Please enter a valid salary greater than 1.';
-  } else if (error.status === 0) {
-    return 'Unable to connect to server. Please try again.';
-  } else {
-    return 'Unexpected error occurred. Please try again later.';
+    if (error.status === 400) {
+      return 'Invalid input. Please enter a valid salary greater than 1.';
+    } else if (error.status === 0) {
+      return 'Unable to connect to server. Please try again.';
+    } else {
+      return 'Unexpected error occurred. Please try again later.';
+    }
   }
-}
 
 }

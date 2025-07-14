@@ -3,6 +3,8 @@ using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.Extensions.Logging;
 using Moq;
 using TaxCalculator.App.Core.Models;
+using TaxCalculator.App.Repository.Entities;
+using TaxCalculator.App.Repository.Interfaces;
 using TaxCalculator.App.Services.Services;
 
 namespace TaxCalculator.App.Tests.services;
@@ -15,24 +17,28 @@ public class UKTaxCalculatorServiceTests
 	[TestInitialize]
 	public void Setup()
 	{
-		var bands = new List<TaxBand>
-		{
-			new TaxBand { LowerLimit = 0, UpperLimit = 5000, TaxRate = 0 },
-			new TaxBand { LowerLimit = 5000, UpperLimit = 20000, TaxRate = 20 },
-			new TaxBand { LowerLimit = 20000, UpperLimit = null, TaxRate = 40 }
-		};
+		var mockTaxBands = new List<TaxBandEntity>
+     {
+	   new TaxBandEntity { LowerLimit = 0, UpperLimit = 5000, Rate = 0 },
+	   new TaxBandEntity { LowerLimit = 5000, UpperLimit = 20000, Rate = 20 },
+	   new TaxBandEntity { LowerLimit = 20000, UpperLimit = null, Rate = 40 }
+     };
+
 
 		// Mock logger
 		var loggerMock = new Mock<ILogger<UKTaxCalculatorService>>();
 		var telemetryConfig = TelemetryConfiguration.CreateDefault();
 		var telemetryClient = new TelemetryClient(telemetryConfig);
-		_service = new UKTaxCalculatorService(bands, loggerMock.Object, telemetryClient);
+		var taxBandRepository = new Mock<ITaxBandRepository>();
+		taxBandRepository.Setup(repo => repo.GetAllAsync())
+			.ReturnsAsync(mockTaxBands);
+		_service = new UKTaxCalculatorService(loggerMock.Object, telemetryClient, taxBandRepository.Object);
 	}
 
 	[TestMethod]
 	public void Calculate_ReturnsZeroTax_ForSalaryBelow5000()
 	{
-		var result = _service.Calculate(4000);
+		var result = _service.Calculate(4000).Result;
 
 		Assert.AreEqual(4000, result.NetAnnual);
 		Assert.AreEqual(0, result.AnnualTax);
@@ -41,7 +47,7 @@ public class UKTaxCalculatorServiceTests
 	[TestMethod]
 	public void Calculate_ReturnsCorrectTax_ForSalaryWithin20PercentBand()
 	{
-		var result = _service.Calculate(15000);
+		var result = _service.Calculate(15000).Result;
 
 		// Taxable: 15000 - 5000 = 10000 @ 20%
 		decimal expectedTax = 10000 * 0.20m;
@@ -53,7 +59,7 @@ public class UKTaxCalculatorServiceTests
 	[TestMethod]
 	public void Calculate_ReturnsCorrectTax_ForSalaryCrossingInto40PercentBand()
 	{
-		var result = _service.Calculate(30000);
+		var result = _service.Calculate(30000).Result;
 
 		/*
              - First 5000: 0%
@@ -73,7 +79,7 @@ public class UKTaxCalculatorServiceTests
 	[TestMethod]
 	public void Calculate_ReturnsCorrectTax_ForHighSalary()
 	{
-		var result = _service.Calculate(100000);
+		var result = _service.Calculate(100000).Result;
 
 		/*
              - First 5000: 0%

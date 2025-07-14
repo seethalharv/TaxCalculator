@@ -1,6 +1,7 @@
 ﻿using Microsoft.ApplicationInsights;
 using Microsoft.Extensions.Logging;
 using TaxCalculator.App.Core.Models;
+using TaxCalculator.App.Repository.Interfaces;
 
 namespace TaxCalculator.App.Services.Services
 {
@@ -12,33 +13,32 @@ namespace TaxCalculator.App.Services.Services
 	/// service and must be ordered by their lower limits in ascending order.</remarks>
 	public class UKTaxCalculatorService : ITaxCalculatorService
 	{
-		//The bands are set in app settings and injected via DI
-		private readonly List<TaxBand> _bands;
 		private readonly ILogger<UKTaxCalculatorService> _logger;
 		private readonly TelemetryClient _telemetry;
-		public UKTaxCalculatorService(IEnumerable<TaxBand> bands,
-	                                 ILogger<UKTaxCalculatorService> logger,
-	                                 TelemetryClient telemetry)
+		private readonly ITaxBandRepository _taxBandRepository;
+
+		public UKTaxCalculatorService(ILogger<UKTaxCalculatorService> logger,
+	                                 TelemetryClient telemetry,
+									 ITaxBandRepository taxBandRepository)
 		{
-			// Ensure bands are ordered by LowerLimit ascending
-			_bands = bands.OrderBy(b => b.LowerLimit).ToList();
+			_taxBandRepository = taxBandRepository ?? throw new ArgumentNullException(nameof(taxBandRepository));
 			_logger = logger ?? throw new ArgumentNullException(nameof(logger));
 			_telemetry = telemetry ?? throw new ArgumentNullException(nameof(telemetry));
 		}
-		public TaxResult Calculate(decimal salary)
+		public async Task<TaxResult> Calculate(decimal salary)
 		{
 			if (salary <= 0)
 				throw new ArgumentException("Salary must be a positive integer.", nameof(salary));
-
-			if (_bands == null || !_bands.Any())
-				throw new InvalidOperationException("Tax bands are not configured.");
+			
 
 			try
 			{
+				var bands = await _taxBandRepository.GetAllAsync();
+				bands = bands.OrderBy(b => b.LowerLimit).ToList();
 				decimal totalTax = 0;
 
 				//Loop through each tax band and calculate the tax
-				foreach (var band in _bands)
+				foreach (var band in bands)
 				{
 					if (salary <= band.LowerLimit)
 						continue;
@@ -50,7 +50,7 @@ namespace TaxCalculator.App.Services.Services
 
 					if (taxableInBand > 0)
 					{
-						decimal bandTax = taxableInBand * (band.TaxRate / 100m);
+						decimal bandTax = taxableInBand * (band.Rate / 100m);
 						totalTax += bandTax;
 					}
 				}
