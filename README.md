@@ -35,7 +35,7 @@ Note: Authentication is not enabled in this deployment to allow open access for 
 TaxCalculator.App.Api/               → ASP.NET Core Web API
   ├── Controllers/
   ├── Program.cs
-  ├── appsettings.json               → Defines TaxBands
+  ├── appsettings.json               → Could define any custom settings as needed.
 
 TaxCalculator.App.Models/            → Domain models (TaxInput, TaxResult, TaxBand)
 
