@@ -32,19 +32,21 @@ Note: Authentication is not enabled in this deployment to allow open access for 
 ## 🧱 Architecture Overview
 
 ```
-TaxCalculator.App.Api/         → ASP.NET Core Web API
+TaxCalculator.App.Api/              → ASP.NET Core Web API
   ├── Controllers/
   ├── Program.cs
-  ├── appsettings.json         → Defines TaxBands
+  ├── appsettings.json              → Defines TaxBands
 
-TaxCalculator.App.Core/        → Domain models (TaxInput, TaxResult, TaxBand)
+TaxCalculator.App.Models/           → Domain models (TaxInput, TaxResult, TaxBand)
 
-TaxCalculator.App.Services/    → Business logic (UKTaxCalculatorService)
+TaxCalculator.App.Repository/        → Database access layer.
 
-TaxCalculator.App.Tests/       → MSTest unit/integration tests
+TaxCalculator.App.Services/          → Business logic (UKTaxCalculatorService)
 
-AngularClient/                 → Angular frontend
-  └── dist/                    → Build output (served by API)
+TaxCalculator.App.Tests/             → MSTest unit/integration tests
+
+AngularClient/                       → Angular frontend
+  └── dist/                          → Build output (served by API)
 ```
 
 ---
