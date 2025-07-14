@@ -1,59 +1,187 @@
-# TaxCalculatorAppUI
+# 💷 UK Tax Calculator – Full Stack ASP.NET Core + Angular App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.0.
+![.NET](https://img.shields.io/badge/.NET-8.0-blueviolet)
+![Angular](https://img.shields.io/badge/Angular-20-red)
+![Azure](https://img.shields.io/badge/Deployed-AzureAppService-blue)
+![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
-## Development server
+This application is deployed as a unified full-stack app on Azure App Service, combining the ASP.NET Core 8.0 Web API and Angular 20+ frontend.
 
-To start a local development server, run:
+🔗 Live URL:
+https://uk-tax-api-h5d9frg9c5b5e6ez.canadacentral-01.azurewebsites.net/index.html
+👉 UK Tax Calculator Web App
 
-```bash
-ng serve
+Note: Authentication is not enabled in this deployment to allow open access for reviewers and demo purposes. In a production environment, identity and RBAC (Role-Based Access Control) would be enforced via Azure Active Directory or equivalent solutions.
+
+
+
+---
+
+## 🔧 Features
+
+- Enter gross annual salary and get tax breakdown
+- Customizable tax bands (`appsettings.json`)
+- Built-in model validation
+- Unit and integration tests with MSTest
+- Angular UI served directly from ASP.NET Core backend
+- Swagger support
+- Postman collection with automated test scripts
+
+---
+
+## 🧱 Architecture Overview
+
+```
+TaxCalculator.App.Api/         → ASP.NET Core Web API
+  ├── Controllers/
+  ├── Program.cs
+  ├── appsettings.json         → Defines TaxBands
+
+TaxCalculator.App.Core/        → Domain models (TaxInput, TaxResult, TaxBand)
+
+TaxCalculator.App.Services/    → Business logic (UKTaxCalculatorService)
+
+TaxCalculator.App.Tests/       → MSTest unit/integration tests
+
+AngularClient/                 → Angular frontend
+  └── dist/                    → Build output (served by API)
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🧩 Configurable Tax Bands
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Located in `appsettings.json`:
 
-```bash
-ng generate component component-name
+```json
+"TaxBands": [
+  { "LowerLimit": 0, "UpperLimit": 5000, "TaxRate": 0 },
+  { "LowerLimit": 5000, "UpperLimit": 20000, "TaxRate": 20 },
+  { "LowerLimit": 20000, "UpperLimit": null, "TaxRate": 40 }
+]
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- [.NET 8 SDK](https://dotnet.microsoft.com/)
+- [Node.js + npm](https://nodejs.org/)
+- Angular CLI (`npm install -g @angular/cli`)
+
+---
+
+### 🔧 Backend Setup
 
 ```bash
-ng generate --help
+git clone https://github.com/<your-username>/uk-tax-calculator.git
+cd TaxCalculator.App.Api
+dotnet restore
 ```
 
-## Building
+---
 
-To build the project run:
+### 🖼️ Frontend Setup (Angular)
 
 ```bash
-ng build
+cd AngularClient
+npm install
+ng build --configuration=production
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Copy output from `dist/<app-name>/` into:
 
 ```bash
-ng test
+../TaxCalculator.App.Api/AngularClient/browser/
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+### ▶️ Run Locally
 
 ```bash
-ng e2e
+cd TaxCalculator.App.Api
+dotnet run
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+- 🔗 UI: `https://localhost:7072/index.html` (this will take you to the calculator angualr UI single page)
+- 🔗 Swagger: `https://localhost:7072/swagger`
+- 🔗 API: `POST /api/taxCalculator/calculate`
 
-## Additional Resources
+---
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 🧪 Testing
+
+### ✅ Unit & Integration Tests (MSTest)
+
+```bash
+dotnet test TaxCalculator.App.Tests
+```
+
+Includes tests for:
+- `TaxCalculatorController`
+- `UKTaxCalculatorService`
+
+---
+
+### 📬 Postman Collection
+
+Import `UK-Tax-Calculator-API.postman_collection.json` into Postman.
+
+Includes:
+- `POST /api/taxCalculator/calculate`
+- Test inputs for edge cases
+- Test scripts to validate structure and response codes
+
+> ✅ Ready to run with [Newman](https://github.com/postmanlabs/newman) for CI/CD.
+
+---
+
+## ☁️ Deploy to Azure App Service
+
+1. Use Visual Studio **Publish** or CLI:
+   ```bash
+   dotnet publish -c Release
+   ```
+
+2. Make sure `.csproj` includes:
+
+   ```xml
+   <ItemGroup>
+     <Content Include="AngularClient\browser\**\*">
+       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+     </Content>
+   </ItemGroup>
+   ```
+
+3. Angular served via:
+
+   ```csharp
+   app.UseStaticFiles(new StaticFileOptions {
+     FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "AngularClient", "browser"))
+   });
+   app.MapFallbackToFile("index.html");
+   ```
+
+---
+
+## 🧠 Design Highlights
+
+- Follows **Clean Architecture** principles
+- Uses DI, validation, model binding, and service segregation
+- All logic easily testable and reusable
+- Suitable for production deployment or Azure DevOps pipelines
+
+---
+
+## 📄 License
+
+MIT License. See [`LICENSE`](./LICENSE) for details.
+
+---
+
+## ✉️ Contact
+
+Built by [sharv](https://github.com/seethalharv)  
+Questions? Please email: seethalmd@gmail.com
