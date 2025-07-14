@@ -13,6 +13,15 @@
   background-color: #fdfdfd;
   font-family: Arial, sans-serif;
 }
+.error-banner {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 4px;
+  margin-top: 1rem;
+}
+
 
 h1 {
   font-size: 2rem;
@@ -55,3 +64,4 @@ button {
 button:hover {
   background-color: #005a9e;
 }
+
